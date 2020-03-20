@@ -1,11 +1,11 @@
 const mysql = require('mysql');
-const DB_NAME = 'gallery_store';
+const DB_NAME = 'sql12328364';
 
 function createDatabaseConnection(callback) {
     const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '12345',
+        host: 'sql12.freemysqlhosting.net',
+        user: 'sql12328364',
+        password: '85cjTRCdCX',
         database: DB_NAME,
     });
 

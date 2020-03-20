@@ -86,26 +86,21 @@ function UpdatePasswordTrainee(id , newPassword , callback){
 function UpdateInformationTrainee(id ,imgpath, traineeName , phone , address , callback){
 
     let params = `name = '${traineeName}', address = '${address}', phone = '${phone}'`;
-
     if (imgpath !== '') {
         params += `,photo='${imgpath}'`
     }
-    
     const sql = `UPDATE ${DB_NAME}.regstration SET ${params} WHERE (id = '${id}')`;
     createDatabaseConnection((connectError, connection) => {
         if (connectError) {
             callback(connectError, null);
         } else {
             connection.query(sql, (error, result) => {
-             
                     callback(error,result);
-
                 connection.end();
             });
         }
     });
 }
-
 
 function getmyprofile(id , callback) {
 const sql = `select id,name,address,phone,email,photo from ${DB_NAME}.regstration where id=${id}` ;
@@ -124,7 +119,7 @@ createDatabaseConnection((connectError, connection) => {
 }
 
 function addImage(id,name,photo,sallery,size,kind,notes,callback){
-    const sql = "INSERT INTO `work`.`add_picture` (`name`, `photo`, `sallery`, `size`, `date_end`, `kind`, `notes`, `id_user`) VALUES "+`('${name}', '${photo}', '${sallery}', '${size}', '2222/2/2', '${kind}', '${notes}', '${id}');` ;
+    const sql = `INSERT INTO ${DB_NAME}.add_picture ( name , photo , sallery , size , date_end , kind , notes , id_user) VALUES ('${name}', '${photo}', '${sallery}', '${size}', '2222/2/2', '${kind}', '${notes}', '${id}');` ;
 createDatabaseConnection((connectError, connection) => {
     if (connectError) {
         callback(connectError, null);
@@ -147,7 +142,7 @@ function getImages(id,data){
     on add_picture.id_user=regstration.id where add_picture.id_user=${id}`
     createDatabaseConnection((connectError, connection) => {
         if (connectError) {
-            callback(connectError, null);
+            // callback(connectError, null);
         } else {
             connection.query(sql, (error, result) => {
              
@@ -161,10 +156,10 @@ function getImages(id,data){
      
 }
 function getAllImages(data){
-    const sql = `SELECT * FROM work.add_picture;`
+    const sql = `SELECT * FROM ${DB_NAME}.add_picture;`
     createDatabaseConnection((connectError, connection) => {
         if (connectError) {
-            callback(connectError, null);
+            // callback(connectError, null);
         } else {
             connection.query(sql, (error, result) => {
              
@@ -177,10 +172,10 @@ function getAllImages(data){
 
 }
 function getDataImage(id,data){
-    const sql = `SELECT add_picture.name,add_picture.sallery FROM work.add_picture where add_picture.id=${id}`
+    const sql = `SELECT add_picture.name,add_picture.sallery FROM ${DB_NAME}.add_picture where add_picture.id=${id}`
     createDatabaseConnection((connectError, connection) => {
         if (connectError) {
-            callback(connectError, null);
+            // callback(connectError, null);
         } else {
             connection.query(sql, (error, result) => {
              
@@ -193,10 +188,10 @@ function getDataImage(id,data){
 
 }
 function editImage(id,name,sallery,data){
-    const sql = "UPDATE `work`.`add_picture` SET"+"`name` = "+`'${name}',`+ `sallery` +`= '${sallery}'`+"WHERE (`id` = "+`'${id}');`
+    const sql = `UPDATE ${DB_NAME}.add_picture SET name = '${name}', sallery = '${sallery}' WHERE (id = '${id}');`
     createDatabaseConnection((connectError, connection) => {
         if (connectError) {
-            callback(connectError, null);
+            // callback(connectError, null);
         } else {
             connection.query(sql, (error, result) => {
              
@@ -209,10 +204,10 @@ function editImage(id,name,sallery,data){
 
 }
 function deleteImage(id,data){
-    const sql = "DELETE FROM `work`.`add_picture` WHERE (`id` = "+`'${id}')`
+    const sql = `DELETE FROM ${DB_NAME}.add_picture WHERE (id = '${id}')`
     createDatabaseConnection((connectError, connection) => {
         if (connectError) {
-            callback(connectError, null);
+            // callback(connectError, null);
         } else {
             connection.query(sql, (error, result) => {
              
@@ -225,10 +220,10 @@ function deleteImage(id,data){
 
 }
 function getByIDImages(id,data){
-    const sql = `SELECT * FROM work.add_picture where add_picture.id=${id}`
+    const sql = `SELECT * FROM ${DB_NAME}.add_picture where add_picture.id=${id}`
     createDatabaseConnection((connectError, connection) => {
         if (connectError) {
-            callback(connectError, null);
+            // callback(connectError, null);
         } else {
             connection.query(sql, (error, result) => {
              
@@ -246,6 +241,4 @@ function getByIDImages(id,data){
 module.exports = {
     checkTraineeEmailExists,addTraineeAccount,checkPasswordDB,showNameWithLogIn,UpdatePasswordTrainee,
     getmyprofile,UpdateInformationTrainee,addImage,getImages,getAllImages,getDataImage,editImage,deleteImage,getByIDImages
-
-
 };
