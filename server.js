@@ -3,7 +3,7 @@ const
     app = express(),
     bodyParser = require('body-parser'),
     trainee = require('./api/trainee'),
-    port = 3000
+    port = process.env.PORT || 3000
 ;
 app.use(express.json({limit:'50mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));

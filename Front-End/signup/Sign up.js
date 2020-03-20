@@ -6,6 +6,7 @@ let Email_SignUp_P = document.getElementById("alert_Email");
 let Address_SignUp_P = document.getElementById("alert_address");
 let Phone_SignUp_P = document.getElementById("alert_phone");
 
+
 // for input text Signup
 let Name_SignUp = document.getElementById("name");
 let Pass_SignUp = document.getElementById("password");
@@ -123,7 +124,7 @@ function ConfermPasswordRegExp() {
         }
 }
 
-let URL = 'http://localhost:3000/galleryStore/';
+let URL = 'https://completeproject.herokuapp.com/galleryStore/';
 let header = new Headers();
 header.append("Content-Type","Application/json")
 // post the user information to database .......................................
